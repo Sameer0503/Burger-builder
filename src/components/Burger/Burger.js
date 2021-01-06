@@ -2,7 +2,6 @@ import BurgerTop from '../BurgerIngredients/Burger_bun_top';
 import BurgerBottom from '../BurgerIngredients/Burger_bun_bottom';
 import BurgerMeat from '../BurgerIngredients/Burger_meat';
 import BurgerSalad from '../BurgerIngredients/Burger_salad';
-import Aux from '../../hoc/Aux';
 
 const burger = (props) => {
     const ingList = [];
@@ -15,11 +14,11 @@ const burger = (props) => {
     }
     
     return (
-        <Aux>
+        <div style={{backgroundColor : "lightgrey"}}>
             <BurgerTop/>
             {ingList}
             <BurgerBottom/>
-        </Aux>
+        </div>
     );
 }
 export default burger;

@@ -8,9 +8,15 @@ class BurgerBuilder extends React.Component {
         Ingredients : {
             Salad: 2,
             Meat: 0
-        }
+        },
+        Price : 4
     };
 
+    INGREDIENTS_PRICE = {
+        Salad : 2,
+        Meat : 5
+    }
+    
     ingredientHandler = (type, val) => {
         switch (type) {
             case 'salad':
@@ -22,6 +28,7 @@ class BurgerBuilder extends React.Component {
                         }
                     }
                 );
+                this.burgerPriceCalculator();
                 break;
             case 'meat':
                 this.setState(
@@ -32,19 +39,32 @@ class BurgerBuilder extends React.Component {
                         }
                     }
                 );
-            break;
+                this.burgerPriceCalculator();
+                break;
         
             default:
                 break;
-        }
-        
-        
+        }    
+    }
+
+    burgerPriceCalculator =  () =>  {
+        this.setState((prevState) => {
+            let salad_price = prevState.Ingredients.Salad * this.INGREDIENTS_PRICE.Salad;
+            let meat_price = prevState.Ingredients.Meat * this.INGREDIENTS_PRICE.Meat;
+            
+            return{
+                Price : salad_price + meat_price
+            }
+        });
     }
     render(){
         return(
             <Aux>
                 <Burger ingredients={this.state.Ingredients} />
-                <BurgerController stateValue = {this.state.Ingredients} stateChange = {this.ingredientHandler}/>
+                <div style={{backgroundColor : 'lightblue'}}>
+                    <div>Price: {this.state.Price}</div>
+                    <BurgerController stateValue = {this.state.Ingredients} stateChange = {this.ingredientHandler}/>
+                </div>
             </Aux>
         )
     };
